@@ -1,0 +1,397 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #474e5d;
+    font-family: Helvetica, sans-serif;
+  }
+  
+  /* The actual timeline (the vertical ruler) */
+  .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 80px;
+  }
+  
+  /* The actual timeline (the vertical ruler) */
+  .timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: lightgray;
+    top: 0;
+    bottom: 0;
+    left: 30%;
+    margin-left: 5px;
+    
+    margin-top: 150px;
+  }
+  
+  /* Container around content */
+  .container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 35%;
+  }
+  
+  /* The circles on the timeline */
+  .container::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    margin-top: 15px;
+    background-color:#d03a17;
+    border: 4px solid #d03a17;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  /* Place the container to the left */
+  .left {
+    left: 0;
+  }
+  
+  /* Place the container to the right */
+  .right {
+    left: -45%;
+    display: flex;
+    
+    width: 950px;
+  }
+  
+  /* Add arrows to the left container (pointing right) */
+  .left::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 30px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+  }
+  
+  /* Add arrows to the right container (pointing left) */
+  .right::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    left: 30px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+  
+  /* Fix the circle for containers on the right side */
+  .right::after {
+    left: -16px;
+  }
+  
+  /* The actual content */
+  .content {
+    padding: 10px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    padding-right: 50px;
+    margin-top: 15px;
+   }
+  
+  /* Media queries - Responsive timeline on screens less than 600px wide */
+  @media screen and (max-width: 600px) {
+    /* Place the timelime to the left */
+    .timeline::after {
+    left: 31px;
+    }
+    
+    /* Full-width containers */
+    .container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+    }
+    
+    /* Make sure that all arrows are pointing leftwards */
+    .container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+    }
+  
+    /* Make sure all circles are at the same spot */
+    .left::after, .right::after {
+    left: 15px;
+    }
+    
+    /* Make all right containers behave like the left ones */
+    .right {
+    left: 0%;
+    }
+  }
+  .dropdown {
+    float: left;
+    overflow: hidden;
+    padding-left:100px ;
+    margin-top: 50px;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: blue;
+    padding: 0px 0px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    margin-right: 30px;
+   
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  hr {
+    border-top: 2px solid rgba(0,0,0,0.2);
+    width: 950px;
+    margin-left: 250px;
+  }
+  .button {
+    background-color: rgba(0,0,0,0.8);
+    border: none;
+    color: white;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-right: -300px;
+    height: 40px;
+    width: 200px;
+    margin-top: -60px;
+    padding-top: -50px;
+    justify-content: space-around;
+    
+   
+  }
+   /* .inline{
+    display: flex;
+    padding-left: 50px;
+  
+  }  */
+  
+  .inline a{
+    color: red;
+    text-decoration: none;
+    float: left;
+    margin-right:0px;
+  }
+  .inline{
+    margin-right: -20px;
+   
+    margin-top: 50px;
+  }
+  select {
+      display: flex;
+      padding: 10px 6px;
+      flex-flow: column nowrap;
+      box-sizing: border-box;
+      width: 200px;
+      border: 1.5px solid blue;
+      color:rgba(0, 0, 0, 0.9);
+      font-weight: bold;
+      border-radius: 5px;
+      align-items: center;
+      font-size: 11px;
+      font-family: proxima-nova, sans-serif;
+      margin-left: 6px;
+    }
+  
+    label {
+      color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      font-size: 0.9em;
+      font-family: proxima-nova, sans-serif;
+      letter-spacing: 1px;
+     
+      column-gap:30px;
+      margin-right: 4px;
+    }
+  .size{
+    flex-flow: cloumn nowrap;
+     
+    right:10px;
+  }
+  .crust{
+    flex-flow: cloumn nowrap;
+  
+    
+  }
+  
+  select options{
+    display: flex;
+    font-size: 10px;
+  }
+  .drop{
+    /* flex-basis: auto; */
+      flex-flow: row nowrap;
+      display: flex;
+      margin-top: -80px;
+      margin-bottom:1.0rem;
+      width: 100%;
+      align-items: center;
+      column-gap: 38px;
+  
+     font-size: 17px;
+     color: rgb(180, 191, 196);
+     height: 75px;
+     font-family: proxima-nova, sans-serif;
+  }
+   /* .size select{
+    margin-left: 20px;
+  }
+  .size label{
+    margin-left: 25px;
+  } 
+  .round input{
+    margin-left: 80px;
+    margin-top: 5px;
+    color: blue;
+    border: 1px solid blue;
+   
+  }
+  .round label{
+    margin-left:305px;
+    width: 300px;
+  } */
+  
+  
+  
+  .centerx{
+    margin-left: 80px;
+    margin-top: -10px;
+    border-radius: 1px;
+  }
+  .btn{
+    width: 175px;
+    border-radius: 1px;
+  }
+  
+  .form-style-9{
+      max-width: 450px;
+      background: #FAFAFA;
+      padding: 30px;
+      margin: 50px auto;
+      box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      border: 6px solid #305A72;
+  }
+  .form-style-9 ul{
+      padding:0;
+      margin:0;
+      list-style:none;
+  }
+  .form-style-9 ul li{
+      display: block;
+      margin-bottom: 10px;
+      min-height: 35px;
+  }
+  .form-style-9 ul li  .field-style{
+      box-sizing: border-box; 
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box; 
+      padding: 8px;
+      outline: none;
+      border: 1px solid #B0CFE0;
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+  
+  }.form-style-9 ul li  .field-style:focus{
+      box-shadow: 0 0 5px #B0CFE0;
+      border:1px solid #B0CFE0;
+  }
+  .form-style-9 ul li .field-split{
+      width: 49%;
+  }
+  .form-style-9 ul li .field-full{
+      width: 100%;
+  }
+  .form-style-9 ul li input.align-left{
+      float:left;
+  }
+  .form-style-9 ul li input.align-right{
+      float:right;
+  }
+  .form-style-9 ul li textarea{
+      width: 100%;
+      height: 100px;
+  }
+  .form-style-9 ul li input[type="button"], 
+  .form-style-9 ul li input[type="submit"] {
+      -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+      -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+      box-shadow: inset 0px 1px 0px 0px #3985B1;
+      background-color: #216288;
+      border: 1px solid #17445E;
+      display: inline-block;
+      cursor: pointer;
+      color: #FFFFFF;
+      padding: 8px 18px;
+      text-decoration: none;
+      font: 12px Arial, Helvetica, sans-serif;
+  }
+  .form-style-9 ul li input[type="button"]:hover, 
+  .form-style-9 ul li input[type="submit"]:hover {
+      background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+      background-color: #28739E;
+  }
+  .rounds {
+  margin-left: 300px;
+  }
+  
+  .size{
+    margin-left: 120px;
+  }
+  .crust{
+    margin-left: 60px;
+  }
