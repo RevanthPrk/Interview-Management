@@ -8,9 +8,7 @@
       @change="change"
     />
     <img :src="src" alt="Avatar" class="h-full w-full object-cover" />
-    <div
-      class="absolute top-0 h-full w-full bg-black bg-opacity-25 flex items-center justify-center"
-    >
+    <div class="absolute top-0 h-full w-full bg-black bg-opacity-25 flex items-center justify-center">
       <button
         type="button"
         @click="browse()"
@@ -40,22 +38,21 @@
       <div>
        <form class="form-style-9">
         <ul>
+         
+           <label>Number Of Participants:</label>
+           <input v-model="participants" type="number" name="field1" class="field-style field-split align-left" placeholder="Number of Participants" />
+
+         <br><br>
          <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
+       <label for="date round">Update :</label>
+       <input type="datetime-local" id="dateround" name="dateround">
+     </li>
+         
+         <li>
+           <textarea name="field5" class="field-style" placeholder="OTHER DETAILS"></textarea>
          </li>
          <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
+           <input type="submit" value="UPDATE" />
          </li>
         </ul>
        </form>
@@ -93,6 +90,7 @@ export default {
     return {
       src: this.defaultSrc,
       popupActivo:false,
+      participants:1,
     };
   },
   methods: {

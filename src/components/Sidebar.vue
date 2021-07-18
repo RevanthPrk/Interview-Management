@@ -30,7 +30,7 @@ export default {
   height: 100%;
   overflow: auto;
   box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.4);
- 
+ margin-top: 70px;
 }
 
 .sidebar a {
@@ -63,9 +63,15 @@ export default {
 }
 @media screen and (max-width: 700px) {
   .sidebar {
-    width: 100%;
+    width: 300px;
     height: auto;
     position: relative;
+    margin-left: 30px;
+
+  }
+
+  .progress{
+    margin-top: -50px;
   }
   .sidebar a {float: left;}
   div.content {margin-left: 0;}

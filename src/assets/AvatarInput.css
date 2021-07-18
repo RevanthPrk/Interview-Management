@@ -118,3 +118,36 @@ color: blue;
 .hidden{
   display: none;
 }
+
+@media screen and (max-width: 1024px) {
+.middle{
+	width: 350px;
+}
+
+}
+@media screen and (max-width: 768px) {
+	.middle{
+		width: 250px;
+		margin-left: -100px;
+	}
+	.section{
+		width:100px;
+		
+	}
+   .img{
+	   width: 10px;
+	   margin-right: 10px;
+   }
+   .topsection{
+	width: 50px;
+	margin-top: 30px;
+	padding-right: 10px;
+	margin-left: -100px;
+  }
+	
+  .toplink{
+	margin-top: 200px;
+	width: 100px;
+	margin-left: -150px;
+  }
+	}

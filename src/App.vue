@@ -90,6 +90,7 @@ body {
     float: left;
     background-color: rosybrown;
     border-collapse: collapse;
+    
   
 }
 
@@ -102,6 +103,7 @@ body {
    background-color: #ffffff;
    border-collapse: collapse;
      margin-left: 270px;
+     margin-top: 80px;
 }
 
 .middledown{
@@ -123,6 +125,22 @@ body {
     margin-left: 75.7%;
     background-color: yellow;
     border-collapse: collapse;
+  
 }
+
+@media screen and (max-width: 768px) {
+	.middle{
+		min-width: 300px;
+		margin-left: 30px;
+    height: 300px;
+	}
+  .left{
+    margin-top: 30px;
+  }
+	.middledown{
+    min-width: 350px;
+  }
+	
+	}
 
 </style>

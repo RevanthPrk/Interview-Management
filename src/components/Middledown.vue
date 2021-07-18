@@ -2,14 +2,21 @@
   <div class="timeline">
    <div class="drop">
     <div class="rounds"><label for="rounds">Number of Rounds:</label>
-     <vs-input-number color="primary" type="border" v-model="number"/>
+    <Modal
+      v-show="isModalVisible"
+      @close="closeModal"
+      :deleteUserDetails=deleteUserDetails()
+    />
+    <div class="increase">
+     <button class="add" @click="addUserDetails()" >+</button>
+     <button class="delete" @click="deleteUserDetails(); selectUserDetails(meeting)" >-</button></div>
     </div>
     <div class="size">
      <label>Type of Rounds:</label>
-     <select>
-      <option >Consecutive Rounds</option>
-      <option >Interview Round</option>
-      <option >Discussion Round</option>
+     <select  v-model="value">
+      <option value="Consecutive Round">Consecutive Rounds</option>
+      <option value="Interview Round">Interview Round</option>
+      <option value="Discussion Round">Discussion Round</option>
      </select>
     </div>
     <div class="crust">
@@ -22,408 +29,61 @@
     </div>
    </div>
    <hr>
-   <div class="offline" v-if="IsOffline">
-    <div class="container right">
+   <div>
+    <div v-for="meeting in filterMeetings" :key="meeting.id" class="container right">
      <div class="content">
-      <h2>08 Sept 2019</h2>
-      <p>Round - 1<br>Resume Shortlisting<br>Discussion Round</p>
+      <h2>{{ meeting.rounddate }}</h2>
+      <p>{{ meeting.roundtype }}<br>{{ meeting.resumestatus }}<br>{{ meetings.roundtype }}</p>
      </div>
-    
-    <div class="dropdown">
-     <button class="dropbtn">Offline Round
-      <i class="fa fa-caret-down"></i>
-     </button>
-     <div class="dropdown-content">
-      <a href="#">Online Round</a>
-      <a href="#">Offline Round</a>
-     </div>
-    </div>
+    <select class="down" v-model="roundnumber"> 
+      <option value="online" class="offline" v-if="IsOffline">Offline Round</option>
+      <option value="offline" class="online" v-if="IsOnline">Online Round</option>
+     </select>
     <div class="inline">
-     <a href="#">Delete</a>
+     <a href="#" @click="selectUserDetails(meeting); showModal()">Delete</a>
       <div class="centerx">
-       <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
+       <vs-button class="btn" @click="popupActivo=true;" color="dark" type="filled">Add Details</vs-button>
     <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-  
- 
-  <div class="container right">
-   <div class="content">
-    <h2>20 Sep 2019</h2>
-    <p>Round - 2<br>Resume Shortlisting<br>Discussion Round</p>
-   </div>
-   <div class="dropdown">
-    <button class="dropbtn">Offline Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Online Round</a>
-       <a href="#">Offline Round</a>
-    </div>
-   </div> 
-  <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-  <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-
-   <div class="container right">
-   <div class="content">
-    <h2>20 Sep 2019</h2>
-    <p>Round - 2<br>Resume Shortlisting<br>Discussion Round</p>
-   </div>
-   <div class="dropdown">
-    <button class="dropbtn">Offline Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Online Round</a>
-       <a href="#">Offline Round</a>
-    </div>
-   </div> 
-  <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-  <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-
-
-  <div class="container right">
-     <div class="content">
-      <h2>20 Sep 2019</h2>
-      <p>Round - 2<br>Resume Shortlisting<br>Discussion Round</p>
-     </div>
-    <div class="dropdown">
-      <button class="dropbtn">Offline Round
-       <i class="fa fa-caret-down"></i>
-      </button>
-     <div class="dropdown-content">
-       <a href="#">Online Round</a>
-       <a href="#">Offline Round</a>
-     </div>
-    </div> 
-   <div class="inline">
-    <a href="#">Delete</a>
-   <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-  <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
+     <Popup />
     </vs-popup>
   </div>
   </div>
   </div>
   </div>
-
-  <div class="online" v-if="IsOnline">
-   <div class="container right">
-    <div class="content">
-      <h2>2 Jul 2020</h2>
-      <p>Round - 1<br>Photograph Contest<br>Consecutive Round</p>
-    </div>
-    <div class="dropdown">
-    <button class="dropbtn">Online Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Offline Round</a>
-      <a href="#">Online Round</a>
-    </div>
-  </div> 
-   <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-    <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
   </div>
-  </div>
-  </div>
-  
-
-   <div class="container right">
-    <div class="content">
-      <h2>1 Jun 2021</h2>
-      <p>Round - 3<br>Internship Interview<br>Interview Round</p>
-    </div>
-    <div class="dropdown">
-    <button class="dropbtn">Online Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Offline Round</a>
-      <a href="#">Online Round</a>
-    </div>
-  </div> 
-   <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-  <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-
-  <div class="container right">
-    <div class="content">
-      <h2>1 Jun 2021</h2>
-      <p>Round - 3<br>Internship Interview<br>Interview Round</p>
-    </div>
-    <div class="dropdown">
-    <button class="dropbtn">Online Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Offline Round</a>
-      <a href="#">Online Round</a>
-    </div>
-  </div> 
-   <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-  <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-
-   <div class="container right">
-    <div class="content">
-      <h2>1 Jun 2021</h2>
-      <p>Round - 3<br>Internship Interview<br>Interview Round</p>
-    </div>
-    <div class="dropdown">
-    <button class="dropbtn">Online Round
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-       <a href="#">Offline Round</a>
-      <a href="#">Online Round</a>
-    </div>
-  </div> 
-   <div class="inline">
-   <a href="#">Delete</a>
-  <div class="centerx">
-    <vs-button class="btn" @click="popupActivo=true" color="dark" type="filled">Add Details</vs-button>
-   <vs-popup class="holamundo"  title="Details of Round" :active.sync="popupActivo">
-      <div>
-       <form class="form-style-9">
-        <ul>
-         <li>
-           <input type="text" name="field1" class="field-style field-split align-left" placeholder="Name" />
-           <input type="email" name="field2" class="field-style field-split align-right" placeholder="Email" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-split align-left" placeholder="Phone" />
-           <input type="url" name="field4" class="field-style field-split align-right" placeholder="Website" />
-         </li>
-         <li>
-           <input type="text" name="field3" class="field-style field-full align-none" placeholder="Subject" />
-         </li>
-         <li>
-           <textarea name="field5" class="field-style" placeholder="Message"></textarea>
-         </li>
-         <li>
-           <input type="submit" value="Send Message" />
-         </li>
-        </ul>
-       </form>
-      </div>
-    </vs-popup>
-  </div>
-  </div>
-  </div>
-  </div>
- </div>
 </template>
 
-<script>
+<script>import Popup from './Popup.vue';
+import Modal from './Modal.vue';
+import axios from "axios";
 export default {
-data(){
+ components:{Popup, Modal},
+data: ()  => {
     return {
       popupActivo:false,
       IsOffline:true,
       typeValue:"offline/online",
       IsOnline:true,
-        number:1,
-    }
+      roundnumber:'online',
+      isModalVisible: false,
+      newmeetings:{rounddate:'30-SEPT-2000',roundnumber:'online',resumestatus:'SHORTLISTED',roundtype:'Interview Round'},
+      currentmeetings:{},
+      meetings:[],
+      type:'',
+      value:'',
+    };
+},
+  mounted:function(){
+    this.getAlldetails();
   },
+
   methods:{
      changeType(){
         if(this.typeValue == "online"){
           this.IsOnline=true;
+          
           this.IsOffline=false;
+
         }
         else if(this.typeValue == "offline"){
            this.IsOnline=false;
@@ -433,12 +93,64 @@ data(){
            this.IsOnline=true;
           this.IsOffline=true;
         }
-      
-     }
-  }
-
-}
-</script>
+      },
+    
+    getAlldetails(){
+        axios.get("http://localhost/ims/process.php?action=read").then(
+            response => {this.meetings = response.data.imstable}
+        );
+    },
+    addUserDetails(){
+        
+        var formData1 = this.toFormDatadetails(this.newmeetings);
+        axios.post("http://localhost/ims/process.php?action=create",formData1).then(response => {
+                this.meetings ={rounddate:'',roundnumber:'',resumestatus:'',roundtype:''};
+                this.getAlldetails();
+                console.log(response);
+    });
+    },
+    UpdateUserDetails(){
+        
+        var formData1 = this.toFormDatadetails(this.currentmeetings);
+        axios.post("http://localhost/ims/process.php?action=update",formData1).then(response => {
+                this.currentmeetings ={};
+                this.getAlldetails();
+                console.log(response);
+    });
+    },
+    deleteUserDetails(){
+        var formData1 = this.toFormDatadetails(this.currentmeetings);
+        axios.post("http://localhost/ims/process.php?action=delete",formData1).then(response => {
+                this.currentmeetings ={};
+                this.getAlldetails();
+                console.log(response);
+                
+     });
+     },
+    toFormDatadetails(obj){
+        var fd = new FormData();
+        for(var i in obj){
+            fd.append(i,obj[i]);
+        }
+        return fd;
+    },
+    selectUserDetails(user){
+        this.currentmeetings = user;
+    },
+      showModal() {
+        this.isModalVisible = true;
+      },
+      closeModal() {
+        this.isModalVisible = false;
+      }
+  },
+  computed: {
+            filterMeetings: function(){
+                return this.meetings.filter(meeting => !meeting.roundtype.indexOf(this.value))
+            }
+        }
+    }
+    </script>
 
 
 <style scoped src="@/assets/Middledown.css">

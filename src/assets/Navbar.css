@@ -8,6 +8,9 @@ nav {
     margin-top: -40px;
     padding: 0;
     margin: 0;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
     
     }
     div#logo {
@@ -80,6 +83,9 @@ nav {
       ul.nav-links {
         width: 50%;
       }
+      nav{
+        width: 400px;
+      }
     }
     /* Mobile */
     @media screen and (max-width: 768px) {
@@ -97,13 +103,16 @@ nav {
         opacity: 0.8;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
+        z-index: 1;
         
       }
     ul.nav-links li {
         opacity: 0;
+        z-index: 1;
       }
     ul.nav-links a {
         width: 100%;
+        z-index: 1;
       }
     div#burger {
         display: block;
@@ -111,10 +120,12 @@ nav {
     ul.dropdown-menu {
         position: relative;
         top: 0;
+        z-index: 1;
       }
     }
     .nav-active {
       transform: translateX(0) !important;
+     
     }
     .toggle .line1 {
       transform: rotate(-45deg) translate(-9px, 10px);
